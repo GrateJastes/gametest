@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include "ResourceHolder.hpp"
 #include "Textures.hpp"
+#include "World.hpp"
 
 #define PLAYER_SPEED 200.f;
 #define TIME_PER_FRAME sf::seconds(1.f / 60.f)
@@ -30,10 +31,12 @@ public:
 
 private:
     sf::RenderWindow mWindow;
+    World mWorld;
     sf::Sprite mPlayer;
     ResourceHolder<sf::Texture, Textures::ID> mTextures;
     Direction mDirection;
 
+private:
     void processEvents();
     void update(sf::Time dt);
     void render();

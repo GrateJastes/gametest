@@ -6,11 +6,12 @@
 #include "ResourceHolder.hpp"
 
 Game::Game()
-: mWindow(sf::VideoMode(960, 720), "Test")
+: mWindow(sf::VideoMode(1024, 768), "Test")
+, mWorld(mWindow)
 , mPlayer() {
-    mTextures.load(Textures::ID::AIRPLANE, "assets/textures/Airplane.png");
+    mTextures.load(Textures::ID::EAGLE, "assets/textures/Airplane.png");
 
-    mPlayer.setTexture(mTextures.get(Textures::ID::AIRPLANE));
+    mPlayer.setTexture(mTextures.get(Textures::ID::EAGLE));
     mPlayer.setPosition(100.f, 100.f);
 }
 
@@ -53,7 +54,9 @@ void Game::processEvents() {
 
 void Game::render() {
     mWindow.clear();
-    mWindow.draw(mPlayer);
+    mWorld.draw();
+
+    mWindow.setView(mWindow.getDefaultView());
     mWindow.display();
 }
 

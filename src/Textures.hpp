@@ -4,5 +4,6 @@ namespace Textures {
     enum class ID {
         EAGLE,
         RAPTOR,
+        DESERT,
     };
 }

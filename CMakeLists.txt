@@ -21,7 +21,9 @@ add_executable(game
         src/Game.cpp
         src/Entity.cpp
         src/Aircraft.cpp
-        src/SceneNode.cpp)
+        src/SceneNode.cpp
+        src/SpriteNode.cpp
+        src/World.cpp)
 
 target_link_libraries(game
         ${SFML_LIBRARIES}
