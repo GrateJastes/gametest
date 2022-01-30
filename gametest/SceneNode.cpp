@@ -1,11 +1,21 @@
-#include "SceneNode.hpp"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunknown-pragmas"
+#pragma ide diagnostic ignored "misc-no-recursion"
 
-SceneNode::SceneNode() : mChildren(), mParent(nullptr) {}
+#include <iostream>
+#include <gametest/SceneNode.hpp>
+#include <gametest/Category.hpp>
+
+SceneNode::SceneNode()
+        : mChildren()
+          , mParent(nullptr) {}
 
 SceneNode::NodePtr SceneNode::detachChild(const SceneNode &node) {
-    auto found = std::find_if(mChildren.begin(), mChildren.end(), [&] (NodePtr &p) -> bool {
-        return p.get() == &node;
-    });
+    auto found = std::find_if(
+            mChildren.begin(), mChildren.end(), [&](NodePtr &p) -> bool {
+                return p.get() == &node;
+            }
+    );
 
     NodePtr result = std::move(*found);
     result->mParent = nullptr;
@@ -27,7 +37,7 @@ void SceneNode::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 void SceneNode::drawChildren(sf::RenderTarget &target, sf::RenderStates states) const {
-    for (auto &child : mChildren) {
+    for (auto &child: mChildren) {
         child->draw(target, states);
     }
 }
@@ -38,7 +48,7 @@ void SceneNode::update(sf::Time dt) {
 }
 
 void SceneNode::updateChildren(sf::Time dt) {
-    for (auto &child : mChildren) {
+    for (auto &child: mChildren) {
         child->update(dt);
     }
 }
@@ -53,6 +63,22 @@ sf::Transform SceneNode::getWorldTransform() const {
     return transform;
 }
 
-const sf::Vector2f SceneNode::getWorldPosition() const {
+sf::Vector2f SceneNode::getWorldPosition() const {
     return getWorldTransform() * sf::Vector2f();
 }
+
+unsigned int SceneNode::getCategory() const {
+    return Category::Scene;
+}
+
+void SceneNode::onCommand(const Command &command, sf::Time dt) {
+    if (command.category & getCategory()) {
+        command.action(*this, dt);
+    }
+
+    for (auto &child: mChildren) {
+        child->onCommand(command, dt);
+    }
+}
+
+#pragma clang diagnostic pop

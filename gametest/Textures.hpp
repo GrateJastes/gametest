@@ -5,5 +5,6 @@ namespace Textures {
         EAGLE,
         RAPTOR,
         DESERT,
+        TitleScreen,
     };
 }

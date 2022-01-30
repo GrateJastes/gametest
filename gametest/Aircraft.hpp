@@ -2,10 +2,10 @@
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "Entity.hpp"
-#include "ResourceHolder.hpp"
+#include <gametest/Entity.hpp>
+#include <gametest/ResourceHolder.hpp>
 
-class Aircraft: public Entity {
+class Aircraft : public Entity {
 public:
     enum class Type {
         EAGLE,
@@ -14,9 +14,12 @@ public:
 
 public:
     explicit Aircraft(Type type, const TextureHolder &textures);
-    virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
+
+    void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 private:
-    Type mType;
+    Type       mType;
     sf::Sprite mSprite;
+
+    unsigned int getCategory() const override;
 };

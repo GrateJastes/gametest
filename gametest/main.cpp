@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Game.hpp"
+#include <gametest/Application.hpp>
 
-int main()
-{
+
+int main() {
     try {
-        Game game;
+        Application game;
         game.run();
     } catch (std::exception &e) {
         std::cerr << "EXCEPTION: " << e.what() << std::endl;

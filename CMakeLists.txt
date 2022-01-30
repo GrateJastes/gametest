@@ -9,21 +9,20 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" ${CMAKE_MODULE_PATH})
 
 find_package(SFML 2.5.1 REQUIRED COMPONENTS system window graphics network audio)
 
-include_directories(include)
-include_directories(src)
-
-
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
-
+include_directories(.)
 
 add_executable(game
-        src/main.cpp
-        src/Game.cpp
-        src/Entity.cpp
-        src/Aircraft.cpp
-        src/SceneNode.cpp
-        src/SpriteNode.cpp
-        src/World.cpp)
+        gametest/main.cpp
+        gametest/Application.cpp
+        gametest/Entity.cpp
+        gametest/Aircraft.cpp
+        gametest/SceneNode.cpp
+        gametest/SpriteNode.cpp
+        gametest/World.cpp
+        gametest/Command.cpp
+        gametest/CommandQueue.cpp
+        gametest/Player.cpp
+        gametest/StateStack.cpp gametest/State.cpp gametest/State.hpp gametest/GameState.cpp gametest/GameState.hpp gametest/TitleState.cpp gametest/TitleState.hpp gametest/Utility.cpp gametest/Utility.hpp gametest/MenuState.cpp gametest/MenuState.hpp)
 
 target_link_libraries(game
         ${SFML_LIBRARIES}

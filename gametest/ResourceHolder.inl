@@ -14,7 +14,8 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 
 template<typename Resource, typename Identifier>
 template<typename Parameter>
-void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string &filename, const Parameter &secondParam) {
+void
+ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string &filename, const Parameter &secondParam) {
     auto resource = std::make_unique<Resource>();
     if (!resource->loadFromFile(filename, secondParam)) {
         throw std::runtime_error("ResourceHolder::load - Failed to load " + filename);

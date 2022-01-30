@@ -1,4 +1,4 @@
-#include "Entity.hpp"
+#include <gametest/Entity.hpp>
 
 void Entity::setVelocity(sf::Vector2f velocity) {
     mVelocity = velocity;
@@ -15,4 +15,13 @@ sf::Vector2f Entity::getVelocity() const {
 
 void Entity::updateCurrent(sf::Time dt) {
     move(mVelocity * dt.asSeconds());
+}
+
+void Entity::accelerate(sf::Vector2f acceleration) {
+    mVelocity += acceleration;
+}
+
+void Entity::accelerate(float dx, float dy) {
+    mVelocity.x += dx;
+    mVelocity.y += dy;
 }
